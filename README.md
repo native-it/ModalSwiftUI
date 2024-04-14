@@ -19,7 +19,7 @@ Currently, SwiftUI has the ability to display a custom modal view using the `.sh
 
 By using UIViewControllerRepresentable and UIHostingController, it's possible to achieve UIKit behavior within SwiftUI views. 
 
-![Demo Video](https://github.com/native-it/ModalSwiftUI/blob/main/demo.gif)
+<img src="https://github.com/native-it/ModalSwiftUI/blob/main/demo.gif" width="400">
 
 ## How to use it?
 
