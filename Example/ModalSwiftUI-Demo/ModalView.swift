@@ -12,15 +12,18 @@ struct ModalView: View {
     @Binding var isPresented: Bool
     
     var body: some View {
-        VStack (spacing: 40) {
+        
+        VStack {
+            Spacer()
             Image(.coffee)
-            
+            Spacer()
             Button {
                 //dismiss() //this will always be with animation
                 isPresented = false
             } label: {
                 Text("Dismiss")
             }
+            Spacer()
         }
     }
 }

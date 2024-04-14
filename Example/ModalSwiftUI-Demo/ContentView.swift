@@ -58,7 +58,7 @@ struct ContentView: View {
                animated: animated,
                transitionStyle: transitionStyle,
                presentationStyle: presentationStyle,
-               backgroundColor: .yellow) {
+               backgroundColor: .yellow.opacity(0.5)) {
             print("Dismissed.")
         } content: {
             ModalView(isPresented: $isPresentedView)
