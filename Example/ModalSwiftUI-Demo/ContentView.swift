@@ -19,16 +19,6 @@ struct ContentView: View {
         case withNavigation
     }
     
-    var isPresented: Binding<Bool> {
-        Binding {
-            self.presentedItem != nil
-        } set: { bool in
-            if !bool {
-                self.presentedItem = nil
-            }
-        }
-    }
-    
     @State var presentedItem: PresentType? = nil
     @State var animated: Bool = true
     @State var presentationStyle: UIModalPresentationStyle = .fullScreen
@@ -81,15 +71,15 @@ struct ContentView: View {
         } content: { item in
             switch item {
             case .regular:
-                ModalView(isPresented: isPresented)
+                ModalView()
             case .withNavigation:
                 NavigationStack {
-                    ModalView(isPresented: isPresented)
+                    ModalView()
                         .navigationTitle("Modal View")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                             Button("Cancel") {
-                                self.isPresented.wrappedValue = false
+                                self.presentedItem = nil
                             }
                         }
                 }

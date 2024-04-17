@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ModalView: View {
-    //@Environment(\.dismiss) private var dismiss
-    @Binding var isPresented: Bool
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         
@@ -18,8 +17,7 @@ struct ModalView: View {
             Image(.coffee)
             Spacer()
             Button {
-                //dismiss() //this will always be with animation
-                isPresented = false
+                dismiss()
             } label: {
                 Text("Dismiss")
             }
@@ -29,5 +27,5 @@ struct ModalView: View {
 }
 
 #Preview {
-    ModalView(isPresented: .constant(true))
+    ModalView()
 }

@@ -71,6 +71,7 @@ internal class ModalController_Item<Content : View, Item: Identifiable>: UIViewC
             switch modalState {
             case .idle:
                 let host = MyHostingViewController(rootView: contentView(item))
+                host.animated = animated
                 host.backgroundColor = UIColor(self.backgroundColor)
                 host.modalTransitionStyle = transitionStyle
                 host.modalPresentationStyle = presentationStyle
