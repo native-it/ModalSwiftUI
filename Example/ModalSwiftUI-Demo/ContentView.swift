@@ -9,8 +9,27 @@ import SwiftUI
 import ModalSwiftUI
 
 struct ContentView: View {
-    @State var isPresentedView = false
-    @State var isPresentedNav = false
+    
+    enum PresentType: Identifiable {
+        var id: Self {
+            return self
+        }
+        
+        case regular
+        case withNavigation
+    }
+    
+    var isPresented: Binding<Bool> {
+        Binding {
+            self.presentedItem != nil
+        } set: { bool in
+            if !bool {
+                self.presentedItem = nil
+            }
+        }
+    }
+    
+    @State var presentedItem: PresentType? = nil
     @State var animated: Bool = true
     @State var presentationStyle: UIModalPresentationStyle = .fullScreen
     @State var transitionStyle: UIModalTransitionStyle = .coverVertical
@@ -39,12 +58,11 @@ struct ContentView: View {
             .pickerStyle(.segmented)
             
             Button("Show Modal View") {
-                self.isPresentedView = true
+                self.presentedItem = .regular
             }
-
             
             Button("Show Modal Nav") {
-                self.isPresentedNav = true
+                self.presentedItem = .withNavigation
             }
         }
         .padding()
@@ -54,30 +72,27 @@ struct ContentView: View {
         .onDisappear(perform: {
             print("View Disppeared.")
         })
-        .modal(isPresented: $isPresentedView,
+        .modal(item: $presentedItem,
                animated: animated,
                transitionStyle: transitionStyle,
                presentationStyle: presentationStyle,
                backgroundColor: .yellow.opacity(0.5)) {
             print("Dismissed.")
-        } content: {
-            ModalView(isPresented: $isPresentedView)
-        }
-        .modal(isPresented: $isPresentedNav,
-               animated: animated,
-               transitionStyle: transitionStyle,
-               presentationStyle: presentationStyle) {
-            print("Dismissed.")
-        } content: {
-            NavigationStack {
-                ModalView(isPresented: $isPresentedNav)
-                    .navigationTitle("Modal View")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        Button("Cancel") {
-                            isPresentedNav = false
+        } content: { item in
+            switch item {
+            case .regular:
+                ModalView(isPresented: isPresented)
+            case .withNavigation:
+                NavigationStack {
+                    ModalView(isPresented: isPresented)
+                        .navigationTitle("Modal View")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            Button("Cancel") {
+                                self.isPresented.wrappedValue = false
+                            }
                         }
-                    }
+                }
             }
         }
     }
