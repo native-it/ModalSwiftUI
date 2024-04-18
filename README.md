@@ -5,7 +5,7 @@ Small library that enables _UIKit-like_ modal transition and presentation of Swi
 
 ## What do you mean?
 
-Currently, SwiftUI has the ability to display a custom modal view using the `.sheet` and `.fullscreen` modifiers, but with limited customization options. Several key shortcomings exist in SwiftUI's modal approach:
+Currently, SwiftUI has the ability to display a custom modal view using the `.sheet` and `.fullScreenCover` modifiers, but with limited customization options. Several key shortcomings exist in SwiftUI's modal approach:
 
 ❌ It's not possible to change the transition appearance (animation)
 
@@ -23,11 +23,11 @@ By using UIViewControllerRepresentable and UIHostingController, it's possible to
 
 ## How to use it?
 
-The functions for presenting a modal view are similar to the current `.sheet` and `.fullscreen` functions, just with additional parameters that enable customization.
+The functions for presenting a modal view are similar to the current `.sheet` and `.fullScreenCover` functions, just with additional parameters that enable customization.
 
 ```swift
 //SwiftUI way
-.sheet(isPresented: $showingModal) {
+.fullScreenCover(isPresented: $showingModal) {
   ModalView()
 }
 
