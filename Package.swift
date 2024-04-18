@@ -15,6 +15,6 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ModalSwiftUI", path: "Sources"),
+            name: "ModalSwiftUI", path: "Sources", resources: [.process("PrivacyInfo.xcprivacy")]),
     ]
 )
